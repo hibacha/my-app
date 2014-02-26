@@ -6,6 +6,7 @@ public class Reader {
 	/**
 	 * @param args
 	 */
+	private final static Map<String, String> map= new HashMap<String, String>();
 	private final static String RELATIVEPATH = "/resource/";
 	private final static String FILENAME="URLMap.properties";
 	public Reader() {
@@ -23,8 +24,15 @@ public class Reader {
 		return sb.toString();
 	}
 	public boolean checkPropertiesFile(){
-		
-		//File f=new File()
-		return false;
+		File f=new File(getFileAbsolutePath());
+		return f.isExist();
 	}
+	public void readIntoMap(){
+	   BufferReader br=new BufferReader(new File(getFileAbsolutePath()));
+	   String str = null;
+	   while((str=br.readLine())!=null){
+	   	String[] arr = str.split("=",2);
+	   	
+	   }
+	}	
 }
