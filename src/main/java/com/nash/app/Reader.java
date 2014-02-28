@@ -1,5 +1,13 @@
 package com.nash.app;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Reader {
 
@@ -13,6 +21,13 @@ public class Reader {
 		// TODO Auto-generated constructor stub
 	}
 
+	public String getProperty(String key) throws IOException{
+		if(map.isEmpty()){
+			readIntoMap();
+		}
+		return map.get(key);
+	}
+	
 	public String getWorkingDir(){
 		String workingDir = System.getProperty("user.dir");
 		return workingDir;
@@ -23,16 +38,25 @@ public class Reader {
 		sb.append(getWorkingDir()).append(RELATIVEPATH).append(FILENAME);
 		return sb.toString();
 	}
-	public boolean checkPropertiesFile(){
+	public boolean isPropertiesFileExist(){
 		File f=new File(getFileAbsolutePath());
-		return f.isExist();
+		return f.exists();
 	}
-	public void readIntoMap(){
-	   BufferReader br=new BufferReader(new File(getFileAbsolutePath()));
+	
+	public void readIntoMap() throws IOException{
+	  
+	  if(!isPropertiesFileExist()){
+		throw new RuntimeException("Please check your file in directory: "+ getFileAbsolutePath());  
+	   }
+	   BufferedReader br=new BufferedReader(new FileReader(new File(getFileAbsolutePath())));
 	   String str = null;
 	   while((str=br.readLine())!=null){
-	   	String[] arr = str.split("=",2);
-	   	
+	   	 String[] arr = str.split("=",2);
+	   	 String key = arr[0];
+	   	 String value =arr[1];
+	   	 if(!map.containsKey(key)){
+	   		 map.put(key, value);
+	   	 }
 	   }
 	}	
 }
