@@ -1,48 +1,32 @@
 package com.nash.app;
 
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 /**
  * Hello world!
- *
+ * 
  */
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+public class Runner {
 
-public class App {
-
-	public static void main(String[] args) {
-		//set chrome driver path
-		System.setProperty("webdriver.chrome.driver",
-				"/Users/zhouyf/workspace/my-app/chromedriver");
-		
+	public static void main(String[] args) throws IOException {
+		Reader reader = new Reader();
 		WebDriver driver = new ChromeDriver();
-
-		// And now use this to visit Google
-		driver.get("http://www.google.com");
-
-		// Find the text input element by its name
-		WebElement element = driver.findElement(By.name("q"));
-		// Enter something to search for
-		element.sendKeys("test");
-		WebElement submit = driver.findElement(By.id("gbqfb"));
-		// Now submit the form. WebDriver will find the form for us from the
-		// element
-		submit.click();
-
-		// Check the title of the page
-		System.out.println("Page title is: " + driver.getTitle());
-
+		String url = reader.getProperty("MEGA_BUS_NY_TO_BOS_APR_27_2014");
+		driver.get(url);
+		
+		sleep(10);
+		//driver.quit();
+	}
+	public static void sleep(int seconds){
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(1000*seconds);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.quit();
-		Assert.assertEquals(true, true);
 	}
-
 }
