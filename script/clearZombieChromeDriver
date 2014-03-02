@@ -1,0 +1,1 @@
+ps -A|grep -E "/.*/chromedrive"|awk '{cmd="kill -9 "$1; system(cmd)}' 2>/dev/null
