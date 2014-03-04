@@ -1,9 +1,15 @@
 package com.nash.app;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.nash.analyzer.AbstractTravelTicket;
+import com.nash.analyzer.MegabusTicket;
 
 /**
  * Hello world!
@@ -17,8 +23,10 @@ public class Runner {
 		WebDriver driver = new ChromeDriver();
 		String url = reader.getProperty("MEGA_BUS_NY_TO_BOS_APR_27_2014");
 		driver.get(url);
-		
-		sleep(10);
+		WebElement resultDiv = driver.findElement(By.xpath("//div[@class='journeyresult']"));
+		AbstractTravelTicket megabus=new MegabusTicket(resultDiv);
+		megabus.setPrice();
+		//sleep(10);
 		//driver.quit();
 	}
 	public static void sleep(int seconds){
