@@ -11,7 +11,7 @@ public abstract class AbstractTravelTicket {
 	Date startDate;
 	Date returnDate;
 	List<Double> priceList=new ArrayList<Double>();
-	
+	abstract public Double getLowestPrice();
 	abstract public void setPrice();
 
 }

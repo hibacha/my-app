@@ -1,5 +1,6 @@
 package com.nash.analyzer;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -24,6 +25,12 @@ public class MegabusTicket extends AbstractTravelTicket {
 			String rawPrice = list.get(i).findElement(By.xpath(".//li[@class='five']")).getText();
 			priceList.add(Double.parseDouble(rawPrice.replaceAll("\\$", "")));
 		}
+	}
+
+	@Override
+	public Double getLowestPrice() {
+		Double lowestPrice  = Collections.min(priceList);
+		return lowestPrice;
 	}
 
 }
