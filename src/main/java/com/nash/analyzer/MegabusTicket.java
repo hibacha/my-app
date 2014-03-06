@@ -15,7 +15,7 @@ public class MegabusTicket extends AbstractTravelTicket {
 	
 	@Override
 	public void setPrice() {
-		List<WebElement> list = result.findElements(By.xpath(".//ul"));
+		List<WebElement> list = result.findElements(By.cssSelector("ul[class='journey standard'"));
 		
 		for (int i = 0; i < list.size(); i++) {
 			//skip header line
@@ -24,6 +24,7 @@ public class MegabusTicket extends AbstractTravelTicket {
 			}
 			String rawPrice = list.get(i).findElement(By.xpath(".//li[@class='five']")).getText();
 			priceList.add(Double.parseDouble(rawPrice.replaceAll("\\$", "")));
+			System.out.println(rawPrice);
 		}
 	}
 
