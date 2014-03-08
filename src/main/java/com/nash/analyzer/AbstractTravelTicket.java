@@ -1,8 +1,8 @@
 package com.nash.analyzer;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import com.nash.exceptions.NoTicketInfoAvailableException;
 
 public abstract class AbstractTravelTicket {
 
@@ -10,8 +10,7 @@ public abstract class AbstractTravelTicket {
 	boolean isOneWay;
 	Date startDate;
 	Date returnDate;
-	List<Double> priceList=new ArrayList<Double>();
-	abstract public Double getLowestPrice();
-	abstract public void setPrice();
+	abstract public Double getLowestPrice() throws NoTicketInfoAvailableException;
+	abstract public void selectLowestPrice() throws NoTicketInfoAvailableException;
 
 }
