@@ -1,4 +1,4 @@
-package com.nash.exception;
+package com.nash.exceptions;
 
 public class NoTicketInfoAvailableException extends Exception{
 
