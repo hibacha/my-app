@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="com.nash.model.Person" table="PERSONS"  schema="public">
+        <id name="personid" type="java.lang.Integer">
+            <column name="personid" />
+            <generator class="assigned"/>
+        </id>
+        <property name="firstname" type="string">
+            <column name="firstname" length="255" not-null="true"  />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="255"  />
+        </property>
+         <property name="city" type="string">
+            <column name="city" length="255"   />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="255"   />
+        </property>
+    </class>
+</hibernate-mapping>
