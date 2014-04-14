@@ -20,8 +20,8 @@ public class MegabusTicket extends AbstractTravelTicket {
 	}
 	
 	public void checkPrice() throws NoTicketInfoAvailableException{
-		logger.info("check price once");
-		List<WebElement> ticketsList = result.findElements(By.cssSelector("ul[class='journey standard']"));
+		logger.debug("check price once");
+		List<WebElement> ticketsList = result.findElements(By.cssSelector("ul.journey.standard"));
 		isTicketInfoAvailable(ticketsList);
 		for (int i = 0; i < ticketsList.size(); i++) {
 			WebElement price = ticketsList.get(i).findElement(By.xpath(".//li[@class='five']"));
@@ -34,7 +34,6 @@ public class MegabusTicket extends AbstractTravelTicket {
 			lowestPrice= currentPrice<lowestPrice?currentPrice:lowestPrice;
 		}
 	}
-
 
 	private void isTicketInfoAvailable(List<WebElement> list)
 			throws NoTicketInfoAvailableException {
