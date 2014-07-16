@@ -1,1 +1,10 @@
+DROP SEQUENCE IF EXISTS public.ticket_seq; 
 CREATE SEQUENCE public.ticket_seq START WITH 1 INCREMENT BY 1;
+
+DROP SEQUENCE IF EXISTS public.route_seq;
+CREATE SEQUENCE public.route_seq START WITH 1 INCREMENT BY 1;
+
+DROP SEQUENCE IF EXISTS public.location_seq;
+CREATE SEQUENCE public.location_seq START WITH 1 INCREMENT BY 1;
+
+
