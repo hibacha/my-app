@@ -14,23 +14,25 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Location {
 	@Id
-	@SequenceGenerator(name="LocationSequence", schema="public", sequenceName="location_seq",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TicketSequence")
+	@SequenceGenerator(name="RouteSequence", schema="public", sequenceName="route_seq",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RouteSequence")
 	private Integer id;
 	private String address;
 	private String latitude;
 	private String longitude;
 	private String abbreviation;
 	private String city;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickUp")
 	private Set<Route> routeGivenByPickUp = new HashSet<Route>();
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "dropOff")
 	private Set<Route> routeGivenByDropOff = new HashSet<Route>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickUp")
+	
 	public Set<Route> getRouteGivenByPickUp(){
 		return this.routeGivenByPickUp;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "dropOff")
+	
 	public Set<Route> getRouteGivenByDropOff() {
 		return routeGivenByDropOff;
 	}
