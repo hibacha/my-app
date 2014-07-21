@@ -3,6 +3,7 @@ package com.nash.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,8 +15,8 @@ import javax.persistence.SequenceGenerator;
 @Entity
 public class Location {
 	@Id
-	@SequenceGenerator(name="RouteSequence", schema="public", sequenceName="route_seq",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RouteSequence")
+	@SequenceGenerator(name="LocationSequence", schema="public", sequenceName="location_seq",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LocationSequence")
 	private Integer id;
 	private String address;
 	private String latitude;
