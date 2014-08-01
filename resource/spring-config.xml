@@ -24,28 +24,72 @@
 	<!-- Configure Hibernate 4 Session Facotry -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-
+		<qualifier value="firstSessionFactory"></qualifier>
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-
+		
 		<property name="hibernateProperties">
 			<props>
+				<prop key="hibernate.connection.autocommit">true</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
-		     <list>
-                  <value>com.nash.model.Person</value>
-            </list>
-		</property>
-		<!-- 
-		<property name="mappingLocations">
 			<list>
-				<value>Person.hbm.xml</value>
+				<value>com.nash.model.Person</value>
+				<value>com.nash.model.Ticket</value>
+				<value>com.nash.model.Location</value>
+				<value>com.nash.model.Route</value>
 			</list>
 		</property>
-		 -->
+		<!-- <property name="mappingLocations"> <list> <value>Person.hbm.xml</value> 
+			</list> </property> -->
 	</bean>
+
+	<!-- abstract bean -->
+	<bean id="abstractDaoTarget" class="com.nash.dao.GenericDaoHibernateImpl"
+		abstract="true">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="abstractDao" class="org.springframework.aop.framework.ProxyFactoryBean"
+		abstract="true">
+		<property name="interceptorNames">
+			<list>
+				<value>finderIntroductionAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	<!--end of abstract bean -->
+
+	<!-- advisor definition -->
+	<bean id="finderIntroductionAdvisor" class="com.nash.advisor.FinderIntroductionAdvisor">
+
+	</bean>
+	<!-- end of advisor -->
+
+	<!-- POJO definition -->
+	<bean id="locationDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<value>com.nash.dao.LocationDao</value>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>com.nash.model.Location</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<!-- end POJO definition -->
+
+	<!-- test bean definition -->
+	<bean id="foo" class="com.nash.Foo">
+		<property name="test" value="haha"></property>
+	</bean>
+	<!-- end test bean definition -->
 </beans>
