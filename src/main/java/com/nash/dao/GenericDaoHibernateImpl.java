@@ -87,8 +87,12 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	}
 
 	private String queryNameFromMethod(Method method){
-		
-		return "";
+		String qualifiedClassName = type.getName();
+		String methodName = method.getName();
+		StringBuilder sb = new StringBuilder();
+		sb.append(qualifiedClassName).append(".").append(methodName);
+		System.out.println(sb.toString());
+		return sb.toString();
 	}
 	@Override
 	public Iterator iterateFinder(Method method, Object[] queryArgs) {
