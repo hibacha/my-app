@@ -18,7 +18,7 @@ public class FinderIntroductionInterceptor implements IntroductionInterceptor{
 		String methodName = method.getName();
 		if(methodName.startsWith("find")){
 			FinderExecutor genericDaoImpl = (FinderExecutor)methodInvocation.getThis();
-			genericDaoImpl.executeFinder(method,args );
+			return genericDaoImpl.executeFinder(method,args );
 		}
 		return methodInvocation.proceed();
 	}
