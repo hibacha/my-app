@@ -1,5 +1,6 @@
 package com.nash.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,11 +16,11 @@ public class Route {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RouteSequence")
 	private Integer id;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PICKUP")
 	private Location pickUp;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="DROPOFF")
 	private Location dropOff;
 	

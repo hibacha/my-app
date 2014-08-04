@@ -3,7 +3,7 @@ package com.nash.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,16 +23,14 @@ public class Location {
 	private String longitude;
 	private String abbreviation;
 	private String city;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickUp")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickUp",cascade=CascadeType.ALL)
 	private Set<Route> routeGivenByPickUp = new HashSet<Route>();
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "dropOff")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "dropOff",cascade=CascadeType.ALL)
 	private Set<Route> routeGivenByDropOff = new HashSet<Route>();
-	
 	
 	public Set<Route> getRouteGivenByPickUp(){
 		return this.routeGivenByPickUp;
 	}
-	
 	
 	public Set<Route> getRouteGivenByDropOff() {
 		return routeGivenByDropOff;
