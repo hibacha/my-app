@@ -44,8 +44,11 @@
 				<value>com.nash.model.Route</value>
 			</list>
 		</property>
-		<!-- <property name="mappingLocations"> <list> <value>Person.hbm.xml</value> 
-			</list> </property> -->
+	    <property name="mappingLocations">
+		    <list> 
+		    	<value>Location.hbm.xml</value> 
+			</list> 
+		</property>
 	</bean>
 
 	<!-- abstract bean -->
