@@ -8,12 +8,15 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.nash.finder.FinderExecutor;
 
 public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 		GenericDao<T, PK>, FinderExecutor<T> {
-
+	
+	static final Logger logger=LoggerFactory.getLogger(GenericDaoHibernateImpl.class);
 	private Class<T> type;
 
 	private SessionFactory sessionFactory;
@@ -53,11 +56,11 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 //		}
 //		
 //		return id;
+		//TODO not using transaction
 		Session session = getSession();
 		PK id = (PK)session.save(o);
 		session.flush();
 		session.close();
-		
 		return id;
 	}
 
