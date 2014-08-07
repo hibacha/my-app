@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nash.finder.FinderExecutor;
 
@@ -34,33 +35,14 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	}
 
 	public Session getSession() {
-		return sessionFactory.openSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public PK create(T o) {
-		
-//		Session session = getSession();
-//		Transaction tx=null;
-//		PK id = null;
-//		try{
-//		
-//		tx = getSession().beginTransaction();
-//		id = (PK) session.save(o);
-//		}
-//		catch(HibernateException e){
-//			if (tx!=null) tx.rollback();
-//			e.printStackTrace();
-//		}finally{
-//			session.close();
-//		}
-//		
-//		return id;
-		//TODO not using transaction
 		Session session = getSession();
 		PK id = (PK)session.save(o);
-		session.flush();
-		session.close();
 		return id;
 	}
 
@@ -77,11 +59,11 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 		getSession().delete(o);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> executeFinder(Method method, Object[] queryArgs) {
 		final String queryName = queryNameFromMethod(method);
 		final Query namedQuery = getSession().getNamedQuery(queryName);
-		String[] namedParameters = namedQuery.getNamedParameters();
 		for (int i = 0; i < queryArgs.length; i++) {
 			Object arg = queryArgs[i];
 			namedQuery.setParameter(i, arg);
@@ -97,10 +79,16 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator iterateFinder(Method method, Object[] queryArgs) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterator<T> iterateFinder(Method method, Object[] queryArgs) {
+		final String queryName = queryNameFromMethod(method);
+		final Query namedQuery = getSession().getNamedQuery(queryName);
+		for (int i = 0; i < queryArgs.length; i++) {
+			Object arg = queryArgs[i];
+			namedQuery.setParameter(i, arg);
+		}
+		return (Iterator<T>)namedQuery.iterate();
 	}
 
 	// Not showing implementations of getSession() and setSessionFactory()

@@ -2,16 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans    
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx 
+    	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- This sescion tells Spring context where to look for bean classes with 
 		appropriate annotations -->
 	<context:component-scan base-package="com.nash.spring"></context:component-scan>
-
+	<context:component-scan base-package="com.nash.service"></context:component-scan>
+	
+ 	<tx:annotation-driven />
 	<!-- Configure JDBC Connection -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -28,7 +34,7 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-		
+
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.connection.autocommit">true</prop>
@@ -44,10 +50,10 @@
 				<value>com.nash.model.Route</value>
 			</list>
 		</property>
-	    <property name="mappingLocations">
-		    <list> 
-		    	<value>Location.hbm.xml</value> 
-			</list> 
+		<property name="mappingLocations">
+			<list>
+				<value>Location.hbm.xml</value>
+			</list>
 		</property>
 	</bean>
 
@@ -90,9 +96,14 @@
 	</bean>
 	<!-- end POJO definition -->
 
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>
 	<!-- test bean definition -->
 	<bean id="foo" class="com.nash.Foo">
 		<property name="test" value="haha"></property>
 	</bean>
+	
 	<!-- end test bean definition -->
 </beans>
