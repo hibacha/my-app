@@ -12,12 +12,14 @@
         http://www.springframework.org/schema/tx 
     	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- This sescion tells Spring context where to look for bean classes with 
+	<!-- This session tells Spring context where to look for bean classes with 
 		appropriate annotations -->
 	<context:component-scan base-package="com.nash.spring"></context:component-scan>
 	<context:component-scan base-package="com.nash.service"></context:component-scan>
 	
+	<!-- declare using spring transaction annotation  -->
  	<tx:annotation-driven />
+	
 	<!-- Configure JDBC Connection -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -34,10 +36,9 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
@@ -52,7 +53,8 @@
 		</property>
 		<property name="mappingLocations">
 			<list>
-				<value>Location.hbm.xml</value>
+				<value>mappingDefinition/Location.hbm.xml</value>
+				<value>mappingDefinition/Route.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -76,9 +78,9 @@
 	<!--end of abstract bean -->
 
 	<!-- advisor definition -->
-	<bean id="finderIntroductionAdvisor" class="com.nash.advisor.FinderIntroductionAdvisor">
+	<bean id="finderIntroductionAdvisor" class="com.nash.advisor.FinderIntroductionAdvisor"/>
+	<bean id="finderIntroductionAdvisor2" class="com.nash.advisor.FinderIntroductionAdvisor2"/>
 
-	</bean>
 	<!-- end of advisor -->
 
 	<!-- POJO definition -->
