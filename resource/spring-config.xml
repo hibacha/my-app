@@ -49,6 +49,7 @@
 				<value>com.nash.model.Ticket</value>
 				<value>com.nash.model.Location</value>
 				<value>com.nash.model.Route</value>
+				<value>com.nash.model.Schedule</value>
 			</list>
 		</property>
 		<property name="mappingLocations">
@@ -79,7 +80,6 @@
 
 	<!-- advisor definition -->
 	<bean id="finderIntroductionAdvisor" class="com.nash.advisor.FinderIntroductionAdvisor"/>
-	<bean id="finderIntroductionAdvisor2" class="com.nash.advisor.FinderIntroductionAdvisor2"/>
 
 	<!-- end of advisor -->
 
