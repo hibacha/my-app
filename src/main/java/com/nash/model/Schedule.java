@@ -21,26 +21,25 @@ public class Schedule {
 	private Integer id;
 	
 	@Temporal(TemporalType.DATE)
-	private Date date;
+	private Date departureDate;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ROUTE")
 	private Route route;
 	@Temporal(TemporalType.TIME)
 	private Date departureTime;
-	private Float length;
+	private Float tripLength;
 	private Float price;
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDepartureDate() {
+		return departureDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDepartureDate(Date departureDate) {
+		this.departureDate = departureDate;
 	}
 	public Route getRoute() {
 		return route;
@@ -54,11 +53,11 @@ public class Schedule {
 	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
-	public Float getLength() {
-		return length;
+	public Float getTripLength() {
+		return tripLength;
 	}
-	public void setLength(Float length) {
-		this.length = length;
+	public void setTripLength(Float tripLength) {
+		this.tripLength = tripLength;
 	}
 	public Float getPrice() {
 		return price;
@@ -66,8 +65,4 @@ public class Schedule {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-	
-	
-	
-	
 }

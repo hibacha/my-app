@@ -96,6 +96,30 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="routeDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<value>com.nash.dao.RouteDao</value>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>com.nash.model.Route</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<bean id="scheduleDao" parent="abstractDao">
+		<property name="proxyInterfaces">
+			<value>com.nash.dao.ScheduleDao</value>
+		</property>
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg>
+					<value>com.nash.model.Schedule</value>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
 	<!-- end POJO definition -->
 
 	<bean id="transactionManager"
