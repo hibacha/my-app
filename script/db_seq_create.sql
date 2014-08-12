@@ -7,4 +7,6 @@ CREATE SEQUENCE public.route_seq START WITH 1 INCREMENT BY 1;
 DROP SEQUENCE IF EXISTS public.location_seq;
 CREATE SEQUENCE public.location_seq START WITH 1 INCREMENT BY 1;
 
+DROP SEQUENCE IF EXISTS public.schedule_seq;
+CREATE SEQUENCE public.schedule_seq START WITH 1 INCREMENT BY 1;
 
