@@ -15,4 +15,5 @@ public interface GenericDao<T, PK extends Serializable> {
     void update(T transientObject);
 
     /** Remove an object from persistent storage in the database */
+    void delete(T persistentObject);
 }

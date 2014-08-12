@@ -43,6 +43,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 	public PK create(T o) {
 		Session session = getSession();
 		PK id = (PK)session.save(o);
+		logger.info("persist a POJO of "+o.getClass());
 		return id;
 	}
 
@@ -79,6 +80,7 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Iterator<T> iterateFinder(Method method, Object[] queryArgs) {
