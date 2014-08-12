@@ -15,9 +15,15 @@ public class LocationServiceImpl implements LocationService{
 
 	@Override
 	@Transactional
-	public void createLocation(Location location) {
-		locationDao.create(location);
-		throw new RuntimeException("ddd");
+	public Integer createLocation(Location location) {
+		return locationDao.create(location);
+		 
 	}
-
+	
+	@Override
+	@Transactional
+	public void deleteLocationById(Integer id){
+		Location location = locationDao.read(id);
+		locationDao.delete(location);
+	}
 }
