@@ -8,19 +8,18 @@ import com.nash.dao.RouteDao;
 import com.nash.model.Route;
 
 @Service("routeService")
+@Transactional
 public class RouteServiceImpl implements RouteService {
 
 	@Autowired
 	private RouteDao routeDao;
 	
-	@Transactional
 	@Override
 	public Integer save(Route route) {
 		// TODO Auto-generated method stub
 		return routeDao.create(route);
 	}
 
-	@Transactional
 	@Override
 	public void removeById(Integer id){
 		Route bos2nyc = routeDao.read(id);
